@@ -1,67 +1,99 @@
+data2xml is a data to XML converter with a nice interface (for NodeJS).
 
+Installation
+------------
 
+The easiest way to get it is via npm:
 
-    var data = {
-        _attr : {
-            xmlns : 'https://route53.amazonaws.com/doc/2011-05-05/',
-        },
-        ChangeBatch : {
-            Comment : 'This is a comment',
-            Changes : {
-                Change : [
-                    {
-                        Action : 'CREATE',
-                        ResourceRecordSet : {
-                            Name : 'www.example.com',
-                            Type : 'A',
-                            TTL : 300,
-                            ResourceRecords : {
-                                ResourceRecord : [
-                                    {
-                                        Value : '192.0.2.1'
-                                    }
-                                ]
-                            }
-                        },
-                ],
-            },
-        },
-    };
-
-    var xml = data2xml('ChangeResourceRecordSetsRequest', data);
+    npm install data2xml
 
 Examples
 --------
 
-    var data2xml = require('data2xml')';
+Note: in each example, I am leaving out the XML declaration. I am also pretty printing the output - the package doesn't
+do this for you!
+
+    var data2xml = require('data2xml').data2xml;
 
     data2xml('TopLevelElement', {
         _attr : { xmlns : 'http://appsattic.com/xml/namespace' }
         SimpleElement : 'A simple element',
         ComplexElement : {
-            
+            A : 'Value A',
+            B : 'Value B',
+        },
+    });
+
+    =>
+
+    <TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+        <SimpleElement>A simple element</SimpleElement>
+        <ComplexElement>
+            <A>Value A</A>
+            <B>Value B</B>
+        </ComplexElement>
+    </TopLevelLement>
+
+Let's try some attributes on other elements:
+
+
+If you want an element containing data you can do it one of two ways. A simple piece of data will work, but if you want
+attributes you need to specify the value in the element object:
+
+    data2xml('TopLevelElement', {
+        SimpleData : 'Simple Value',
+        ComplexData : {
+            _attr : { type : 'colour' },
+            _value : 'White',
         }
     });
 
-    => 
+    =>
 
+    <TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+        <SimpleData>Simple Value</SimpleData>
+        <ComplexData type="color">White</ComplexData>
+    </TopLevelLement>
+
+If you want an array, just put one in there:
+
+    data2xml('TopLevelElement', {
+        MyArray : [
+            'Simple Value',
+            {
+                _attr : { type : 'colour' },
+                _value : 'White',
+            }
+        ],
+    });
+
+    =>
+
+    <TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+        <MyArray>Simple Value</MyArray>
+        <MyArray type="color">White</MyArray>
+    </TopLevelLement>
 
 Why data2xml
 ------------
 
-Just looking at the XML modules out there I found that the data structure I had to create to get some XML out of the
-other end was just horrible.
+Looking at the XML modules out there I found that the data structure I had to create to get some XML out of the other
+end was not very nice, nor very easy to create. This module is designed so that you can take any plain old data
+structure in one end and get an XML representation out of the other.
 
+In some cases you need to do something a little special (rather than a lot special) but these are for slightly more
+tricky XML representations.
 
+Also, I wanted a really simple way to convert data structures in NodeJS into an XML representation for the Amazon Web
+Services within node-awssum. This seemed to be the nicest way to do it (after trying the other js to xml modules).
 
+* npm info awssum
+* https://github.com/appsattic/node-awssum/
 
 What data2xml does
 ------------------
 
-data2xml converts data structures into XML. It's that simple.
-
-
-
+data2xml converts data structures into XML. It's that simple. No need to worry!
 
 What data2xml doesn't do
 ------------------------
