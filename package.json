@@ -1,0 +1,36 @@
+{
+    "name": "data2xml",
+    "description": "A data to XML converter with a nice interface (for NodeJS).",
+    "version": "0.1.0",
+    "author": {
+        "name":"Andrew Chilton",
+        "email":"chilts@appsattic.com",
+        "url":"http://www.chilts.org/"
+    },
+    "homepage": "https://github.com/appsattic/node-data2xml",
+    "contributors": [],
+    "devDependencies": {
+        "tap": ">= 0.0.11"
+    },
+    "dependencies": {},
+    "bundledDependencies": [],
+    "main": "data2xml.js",
+    "directories": {},
+    "engines": {
+        "node": "*"
+    },
+    "repository": {
+        "type" : "git",
+        "url": "git://github.com/appsattic/node-data2xml.git"
+    },
+	"licenses": [{
+		"type": "MIT",
+		"url": "http://github.com/appsattic/node-data2xml/raw/master/LICENSE"
+	}],
+    "keywords": [
+        "data", "xml", "data2xml", "datatoxml", "js2xml", "jstoxml", "json2xml", "jsontoxml"
+    ],
+    "scripts" : {
+        "test" : "./bin/test.sh"
+    }
+}
