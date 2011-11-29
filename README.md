@@ -7,6 +7,12 @@ The easiest way to get it is via npm:
 
     npm install data2xml
 
+Info and Links:
+
+* npm info data2xml
+* http://search.npmjs.org/#/data2xml
+* https://github.com/appsattic/node-data2xml/
+
 Examples
 --------
 
@@ -86,9 +92,6 @@ tricky XML representations.
 
 Also, I wanted a really simple way to convert data structures in NodeJS into an XML representation for the Amazon Web
 Services within node-awssum. This seemed to be the nicest way to do it (after trying the other js to xml modules).
-
-* npm info awssum
-* https://github.com/appsattic/node-awssum/
 
 What data2xml does
 ------------------
