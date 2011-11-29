@@ -56,13 +56,19 @@ var tests = [
         exp : declaration + '<topelement><array><item>value</item></array></topelement>'
     },
     {
-        name : 'simple two element array',
+        name : 'simple two element array #1',
         element : 'topelement',
         data : { array : [ { item : 'value1' }, 'value2' ] },
         exp : declaration + '<topelement><array><item>value1</item></array><array>value2</array></topelement>'
     },
     {
-        name : 'simple two element array',
+        name : 'simple two element array #2',
+        element : 'topelement',
+        data : { array : [ 'value1', 'value2' ] },
+        exp : declaration + '<topelement><array>value1</array><array>value2</array></topelement>'
+    },
+    {
+        name : 'simple two element array #3',
         element : 'topelement',
         data : { array : { item : [ 'value1', 'value2' ] } },
         exp : declaration + '<topelement><array><item>value1</item><item>value2</item></array></topelement>'
