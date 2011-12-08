@@ -107,7 +107,7 @@ data structure, then this module is for you.
 
 To decide this, you need to know what this module doesn't do. It doesn't deal with:
 
-* mixed type elements (such as <markup>Hello <strongly>World</strongly></markup>)
+* mixed type elements (such as `<markup>Hello <strongly>World</strongly></markup>`)
 * pretty formatting - after all, you're probably sending this XML to another machine
 * CDATA elements ... though I probably _should_ add this (somehow)
 * data objects which are (or have) functions
