@@ -88,7 +88,7 @@ var tests = [
 
 test("some simple xml", function (t) {
     tests.forEach(function(test) {
-        var xml = data2xml.data2xml(test.element, test.data);
+        var xml = data2xml(test.element, test.data);
         t.equal(xml, test.exp, test.name);
     });
 

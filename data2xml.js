@@ -75,10 +75,11 @@ var data2xml = function(name, data) {
 
 // --------------------------------------------------------------------------------------------------------------------
 
-exports.entitify = entitify;
-exports.makeStartTag = makeStartTag;
-exports.makeEndTag = makeEndTag;
-exports.makeElement = makeElement;
-exports.data2xml = data2xml;
+data2xml.entitify = entitify;
+data2xml.makeStartTag = makeStartTag;
+data2xml.makeEndTag = makeEndTag;
+data2xml.makeElement = makeElement;
+
+module.exports = data2xml;
 
 // --------------------------------------------------------------------------------------------------------------------

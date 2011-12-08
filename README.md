@@ -19,7 +19,7 @@ Examples
 Note: in each example, I am leaving out the XML declaration. I am also pretty printing the output - the package doesn't
 do this for you!
 
-    var data2xml = require('data2xml').data2xml;
+    var data2xml = require('data2xml');
 
     data2xml('TopLevelElement', {
         _attr : { xmlns : 'http://appsattic.com/xml/namespace' }
