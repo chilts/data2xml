@@ -11,7 +11,20 @@
 
 var xmlHeader = '<?xml version="1.0" encoding="utf-8"?>\n';
 
-function entitify(str) {
+var data2xml = function(name, data) {
+    var xml = xmlHeader;
+    xml += data2xml.makeElement(name, data);
+    return xml;
+};
+
+data2xml.conf = {
+  // name of json property that stores XML attributes
+  attrProp: '_attr',
+  // name of json property that stores XML element text value
+  valProp: '_value'
+}
+
+data2xml.entitify = function(str) {
     str = '' + str;
     str = str
         .replace(/&/g, '&amp;')
@@ -22,63 +35,52 @@ function entitify(str) {
     return str;
 }
 
-function makeStartTag(name, attr) {
+data2xml.makeStartTag = function(name, attr) {
     attr = attr || {};
     var tag = '<' + name;
     for(var a in attr) {
-        tag += ' ' + a + '="' + entitify(attr[a]) + '"';
+        tag += ' ' + a + '="' + data2xml.entitify(attr[a]) + '"';
     }
     tag += '>';
     return tag;
 }
 
-function makeEndTag(name) {
+data2xml.makeEndTag = function(name) {
     return '</' + name + '>';
 }
 
-function makeElement(name, data) {
+data2xml.makeElement = function(name, data) {
     var element = '';
     if ( Array.isArray(data) ) {
         data.forEach(function(v) {
-            element += makeElement(name, v);
+            element += data2xml.makeElement(name, v);
         });
         return element;
     }
     else if ( typeof data === 'object' ) {
-        element += makeStartTag(name, data._attr);
-        if ( data._value ) {
-            element += entitify(data._value);
+        element += data2xml.makeStartTag(name, data[data2xml.conf.attrProp]);
+        if ( data[data2xml.conf.valProp] ) {
+            element += data2xml.entitify(data[data2xml.conf.valProp]);
         }
         else {
             for (var el in data) {
-                if ( el === '_attr' ) {
+                if ( el === data2xml.conf.attrProp ) {
                     continue;
                 }
-                element += makeElement(el, data[el]);
+                element += data2xml.makeElement(el, data[el]);
             }
         }
-        element += makeEndTag(name);
+        element += data2xml.makeEndTag(name);
         return element;
     }
     else {
         // a piece of data on it's own can't have attributes
-        return makeStartTag(name) + entitify(data) + makeEndTag(name);
+        return data2xml.makeStartTag(name) + data2xml.entitify(data) + data2xml.makeEndTag(name);
     }
     throw "Unknown data " + data;
 }
 
-var data2xml = function(name, data) {
-    var xml = xmlHeader;
-    xml += makeElement(name, data);
-    return xml;
-};
-
 // --------------------------------------------------------------------------------------------------------------------
-
-data2xml.entitify = entitify;
-data2xml.makeStartTag = makeStartTag;
-data2xml.makeEndTag = makeEndTag;
-data2xml.makeElement = makeElement;
 
 module.exports = data2xml;
 
