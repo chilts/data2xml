@@ -11,18 +11,16 @@
 
 var xmlHeader = '<?xml version="1.0" encoding="utf-8"?>\n';
 
-var data2xml = function(name, data) {
+var data2xml = function(name, data, opts) {
+    // set up some defaults for the options
+    opts = opts || {};
+    opts.attrProp = opts.attrProp || '_attr';
+    opts.valProp = opts.valProp || '_value';
+
     var xml = xmlHeader;
-    xml += data2xml.makeElement(name, data);
+    xml += data2xml.makeElement(name, data, opts);
     return xml;
 };
-
-data2xml.conf = {
-  // name of json property that stores XML attributes
-  attrProp: '_attr',
-  // name of json property that stores XML element text value
-  valProp: '_value'
-}
 
 data2xml.entitify = function(str) {
     str = '' + str;
@@ -49,25 +47,25 @@ data2xml.makeEndTag = function(name) {
     return '</' + name + '>';
 }
 
-data2xml.makeElement = function(name, data) {
+data2xml.makeElement = function(name, data, opts) {
     var element = '';
     if ( Array.isArray(data) ) {
         data.forEach(function(v) {
-            element += data2xml.makeElement(name, v);
+            element += data2xml.makeElement(name, v, opts);
         });
         return element;
     }
     else if ( typeof data === 'object' ) {
-        element += data2xml.makeStartTag(name, data[data2xml.conf.attrProp]);
-        if ( data[data2xml.conf.valProp] ) {
-            element += data2xml.entitify(data[data2xml.conf.valProp]);
+        element += data2xml.makeStartTag(name, data[opts.attrProp]);
+        if ( data[opts.valProp] ) {
+            element += data2xml.entitify(data[opts.valProp]);
         }
         else {
             for (var el in data) {
-                if ( el === data2xml.conf.attrProp ) {
+                if ( el === opts.attrProp ) {
                     continue;
                 }
-                element += data2xml.makeElement(el, data[el]);
+                element += data2xml.makeElement(el, data[el], opts);
             }
         }
         element += data2xml.makeEndTag(name);

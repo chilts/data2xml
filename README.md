@@ -40,9 +40,6 @@ do this for you!
         </ComplexElement>
     </TopLevelLement>
 
-Let's try some attributes on other elements:
-
-
 If you want an element containing data you can do it one of two ways. A simple piece of data will work, but if you want
 attributes you need to specify the value in the element object:
 
@@ -51,6 +48,27 @@ attributes you need to specify the value in the element object:
         ComplexData : {
             _attr : { type : 'colour' },
             _value : 'White',
+        }
+    });
+
+    =>
+
+    <TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+        <SimpleData>Simple Value</SimpleData>
+        <ComplexData type="color">White</ComplexData>
+    </TopLevelLement>
+
+You can also specify which properties your attributes and values are in (using the same example as above):
+
+    data2xml('TopLevelElement', {
+        SimpleData : 'Simple Value',
+        ComplexData : {
+            '@' : { type : 'colour' },
+            '#' : 'White',
+        },
+        {
+            attrProp : '@',
+            valProp  : '#',
         }
     });
 

@@ -18,13 +18,6 @@ var declaration = '<?xml version="1.0" encoding="utf-8"?>\n';
 
 // --------------------------------------------------------------------------------------------------------------------
 
-data2xml.conf = {
-    // name of json property that stores XML attributes
-    attrProp: '@',
-    // name of json property that stores XML element text value
-    valProp: '#'
-}
-
 var tests = [
     {
         name : 'one element structure with an xmlns',
@@ -47,7 +40,7 @@ var tests = [
 
 test("some simple xml with '@' for attributes", function (t) {
     tests.forEach(function(test) {
-        var xml = data2xml(test.element, test.data, { attrProp : '@', valueProp : '#' });
+        var xml = data2xml(test.element, test.data, { attrProp : '@', valProp : '#' });
         t.equal(xml, test.exp, test.name);
     });
 
