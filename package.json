@@ -23,10 +23,10 @@
         "type" : "git",
         "url": "git://github.com/appsattic/node-data2xml.git"
     },
-	"licenses": [{
-		"type": "MIT",
-		"url": "http://github.com/appsattic/node-data2xml/raw/master/LICENSE"
-	}],
+    "licenses": [{
+        "type": "MIT",
+        "url": "http://github.com/appsattic/node-data2xml/raw/master/LICENSE"
+    }],
     "keywords": [
         "data", "xml", "data2xml", "datatoxml", "js2xml", "jstoxml", "json2xml", "jsontoxml"
     ],
