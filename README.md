@@ -1,5 +1,7 @@
 data2xml is a data to XML converter with a nice interface (for NodeJS).
 
+[![Build Status](https://secure.travis-ci.org/appsattic/node-data2xml.png?branch=master)](http://travis-ci.org/appsattic/node-data2xml)
+
 Installation
 ------------
 
