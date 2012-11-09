@@ -60,13 +60,11 @@ data2xml.makeElement = function(name, data, opts) {
         if ( data[opts.valProp] ) {
             element += data2xml.entitify(data[opts.valProp]);
         }
-        else {
-            for (var el in data) {
-                if ( el === opts.attrProp ) {
-                    continue;
-                }
-                element += data2xml.makeElement(el, data[el], opts);
+        for (var el in data) {
+            if ( el === opts.attrProp || el === opts.valProp ) {
+                continue;
             }
+            element += data2xml.makeElement(el, data[el], opts);
         }
         element += data2xml.makeEndTag(name);
         return element;
