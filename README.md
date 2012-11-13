@@ -12,7 +12,7 @@ The easiest way to get it is via npm:
 Info and Links:
 
 * npm info data2xml
-* http://search.npmjs.org/#/data2xml
+* https://npmjs.org/package/data2xml
 * https://github.com/appsattic/node-data2xml/
 
 Examples
