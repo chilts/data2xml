@@ -55,6 +55,9 @@ data2xml.makeElement = function(name, data, opts) {
         });
         return element;
     }
+    else if ( typeof data === 'undefined' || data === null ) {
+        return '';
+    }
     else if ( typeof data === 'object' ) {
         element += data2xml.makeStartTag(name, data[opts.attrProp]);
         if ( data[opts.valProp] ) {

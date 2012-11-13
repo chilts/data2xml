@@ -38,6 +38,18 @@ var tests = [
         exp : declaration + '<topelement><second></second></topelement>'
     },
     {
+        name : 'one element structure which has a undefined value',
+        element : 'topelement',
+        data : { second : undefined },
+        exp : declaration + '<topelement></topelement>'
+    },
+    {
+        name : 'one element structure which has a null value',
+        element : 'topelement',
+        data : { second : null },
+        exp : declaration + '<topelement></topelement>'
+    },
+    {
         name : 'one element structure with an xmlns',
         element : 'topelement',
         data : { _attr : { xmlns : 'http://www.appsattic.com/xml/namespace' }, second : 'value' },
