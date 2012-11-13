@@ -137,4 +137,8 @@ To decide this, you need to know what this module doesn't do. It doesn't deal wi
 * entity references
 * all the other stuff you don't care about when dealing with data
 
+# License #
+
+MIT - http://appsattic.mit-license.org/2012/
+
 (Ends)
