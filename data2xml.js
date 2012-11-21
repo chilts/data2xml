@@ -9,20 +9,27 @@
 //
 // --------------------------------------------------------------------------------------------------------------------
 
-var xmlHeader = '<?xml version="1.0" encoding="utf-8"?>\n';
-
-var data2xml = function(name, data, opts) {
-    // set up some defaults for the options
-    opts = opts || {};
-    opts.attrProp = opts.attrProp || '_attr';
-    opts.valProp = opts.valProp || '_value';
-
-    var xml = xmlHeader;
-    xml += data2xml.makeElement(name, data, opts);
-    return xml;
+var defaults = {
+    attrProp : '_attr',
+    valProp  : '_value',
 };
 
-data2xml.entitify = function(str) {
+var xmlHeader = '<?xml version="1.0" encoding="utf-8"?>\n';
+
+module.exports = function(opts) {
+    opts = opts || {};
+
+    opts.attrProp = opts.attrProp || defaults.attrProp;
+    opts.valProp  = opts.valProp  || defaults.valProp;
+
+    return function(name, data) {
+        var xml = xmlHeader;
+        xml += makeElement(name, data, opts);
+        return xml;
+    };
+}
+
+function entitify(str) {
     str = '' + str;
     str = str
         .replace(/&/g, '&amp;')
@@ -33,25 +40,25 @@ data2xml.entitify = function(str) {
     return str;
 }
 
-data2xml.makeStartTag = function(name, attr) {
+function makeStartTag(name, attr) {
     attr = attr || {};
     var tag = '<' + name;
     for(var a in attr) {
-        tag += ' ' + a + '="' + data2xml.entitify(attr[a]) + '"';
+        tag += ' ' + a + '="' + entitify(attr[a]) + '"';
     }
     tag += '>';
     return tag;
 }
 
-data2xml.makeEndTag = function(name) {
+function makeEndTag(name) {
     return '</' + name + '>';
 }
 
-data2xml.makeElement = function(name, data, opts) {
+function makeElement(name, data, opts) {
     var element = '';
     if ( Array.isArray(data) ) {
         data.forEach(function(v) {
-            element += data2xml.makeElement(name, v, opts);
+            element += makeElement(name, v, opts);
         });
         return element;
     }
@@ -59,28 +66,31 @@ data2xml.makeElement = function(name, data, opts) {
         return '';
     }
     else if ( typeof data === 'object' ) {
-        element += data2xml.makeStartTag(name, data[opts.attrProp]);
+        element += makeStartTag(name, data[opts.attrProp]);
         if ( data[opts.valProp] ) {
-            element += data2xml.entitify(data[opts.valProp]);
+            element += entitify(data[opts.valProp]);
         }
         for (var el in data) {
             if ( el === opts.attrProp || el === opts.valProp ) {
                 continue;
             }
-            element += data2xml.makeElement(el, data[el], opts);
+            element += makeElement(el, data[el], opts);
         }
-        element += data2xml.makeEndTag(name);
+        element += makeEndTag(name);
         return element;
     }
     else {
         // a piece of data on it's own can't have attributes
-        return data2xml.makeStartTag(name) + data2xml.entitify(data) + data2xml.makeEndTag(name);
+        return makeStartTag(name) + entitify(data) + makeEndTag(name);
     }
     throw "Unknown data " + data;
 }
 
 // --------------------------------------------------------------------------------------------------------------------
 
-module.exports = data2xml;
+module.exports.makeStartTag = makeStartTag;
+module.exports.makeEndTag   = makeEndTag;
+module.exports.makeElement  = makeElement;
+module.exports.entitify     = entitify;
 
 // --------------------------------------------------------------------------------------------------------------------

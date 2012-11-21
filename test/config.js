@@ -38,9 +38,11 @@ var tests = [
     },
 ];
 
+var convert = data2xml({ attrProp : '@', valProp : '#' });
+
 test("some simple xml with '@' for attributes", function (t) {
     tests.forEach(function(test) {
-        var xml = data2xml(test.element, test.data, { attrProp : '@', valProp : '#' });
+        var xml = convert(test.element, test.data, { attrProp : '@', valProp : '#' });
         t.equal(xml, test.exp, test.name);
     });
 
