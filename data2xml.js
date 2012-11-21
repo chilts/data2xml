@@ -9,9 +9,17 @@
 //
 // --------------------------------------------------------------------------------------------------------------------
 
+var valid = {
+    'omit'   : true, // no element is output       : ''
+    'empty'  : true, // an empty element is output : '<element></element>'
+    'closed' : true, // a closed element is output : '<element/>'
+};
+
 var defaults = {
-    attrProp : '_attr',
-    valProp  : '_value',
+    'attrProp'  : '_attr',
+    'valProp'   : '_value',
+    'undefined' : 'omit',
+    'null'      : 'omit',
 };
 
 var xmlHeader = '<?xml version="1.0" encoding="utf-8"?>\n';
@@ -21,6 +29,18 @@ module.exports = function(opts) {
 
     opts.attrProp = opts.attrProp || defaults.attrProp;
     opts.valProp  = opts.valProp  || defaults.valProp;
+    if ( opts['undefined'] && valid[opts['undefined']] ) {
+        // nothing, this is fine
+    }
+    else {
+        opts['undefined'] = defaults['undefined'];
+    }
+    if ( opts['null'] && valid[opts['null']] ) {
+        // nothing, this is fine
+    }
+    else {
+        opts['null'] = defaults['null'];
+    }
 
     return function(name, data) {
         var xml = xmlHeader;
@@ -62,8 +82,27 @@ function makeElement(name, data, opts) {
         });
         return element;
     }
-    else if ( typeof data === 'undefined' || data === null ) {
-        return '';
+    else if ( typeof data === 'undefined' ) {
+        if ( opts['undefined'] === 'omit' ) {
+            return '';
+        }
+        if ( opts['undefined'] === 'empty' ) {
+            return makeStartTag(name) + makeEndTag(name);
+        }
+        else if ( opts['undefined'] === 'closed' ) {
+            return '<' + name + '/>';
+        }
+    }
+    else if ( data === null ) {
+        if ( opts['null'] === 'omit' ) {
+            return '';
+        }
+        if ( opts['null'] === 'empty' ) {
+            return makeStartTag(name) + makeEndTag(name);
+        }
+        else if ( opts['null'] === 'closed' ) {
+            return '<' + name + '/>';
+        }
     }
     else if ( typeof data === 'object' ) {
         element += makeStartTag(name, data[opts.attrProp]);
