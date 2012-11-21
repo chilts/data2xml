@@ -25,108 +25,110 @@ call and not have to pass that in every time.
 e.g.
 
 ```
-    var data2xml = require('data2xml');
-    var convert  = data2xml(); // or data2xml({})
+var data2xml = require('data2xml');
+var convert  = data2xml(); // or data2xml({})
+```
 
 ... is the same as ...
 
-    var convert = require('data2xml')();
+
+```
+var convert = require('data2xml')();
 ```
 
 Note: in each example, I am leaving out the XML declaration. I am also pretty printing the output - the package doesn't
 do this for you!
 
 ```
-    var convert = require('data2xml')();
+var convert = require('data2xml')();
 
-    convert(
-        'TopLevelElement',
-        {
-            _attr : { xmlns : 'http://appsattic.com/xml/namespace' }
-            SimpleElement : 'A simple element',
-            ComplexElement : {
-                A : 'Value A',
-                B : 'Value B',
-            },
-        }
-    );
+convert(
+    'TopLevelElement',
+    {
+        _attr : { xmlns : 'http://appsattic.com/xml/namespace' }
+        SimpleElement : 'A simple element',
+        ComplexElement : {
+            A : 'Value A',
+            B : 'Value B',
+        },
+    }
+);
 
-    =>
+=>
 
-    <TopLevelLement xmlns="http://appsattic.com/xml/namespace">
-        <SimpleElement>A simple element</SimpleElement>
-        <ComplexElement>
-            <A>Value A</A>
-            <B>Value B</B>
-        </ComplexElement>
-    </TopLevelLement>
+<TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+    <SimpleElement>A simple element</SimpleElement>
+    <ComplexElement>
+        <A>Value A</A>
+        <B>Value B</B>
+    </ComplexElement>
+</TopLevelLement>
 ```
 
 If you want an element containing data you can do it one of two ways. A simple piece of data will work, but if you want
 attributes you need to specify the value in the element object:
 
 ```
-    convert(
-        'TopLevelElement',
-        {
-            SimpleData : 'Simple Value',
-            ComplexData : {
-                _attr : { type : 'colour' },
-                _value : 'White',
-            }
+convert(
+    'TopLevelElement',
+    {
+        SimpleData : 'Simple Value',
+        ComplexData : {
+            _attr : { type : 'colour' },
+            _value : 'White',
         }
-    );
+    }
+);
 
-    =>
+=>
 
-    <TopLevelLement xmlns="http://appsattic.com/xml/namespace">
-        <SimpleData>Simple Value</SimpleData>
-        <ComplexData type="color">White</ComplexData>
-    </TopLevelLement>
+<TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+    <SimpleData>Simple Value</SimpleData>
+    <ComplexData type="color">White</ComplexData>
+</TopLevelLement>
 ```
 
 You can also specify which properties your attributes and values are in (using the same example as above):
 
 ```
+var convert = require('data2xml')({ attrProp : '@', valProp  : '#', });
+convert(
+    'TopLevelElement',
+    {
+        SimpleData : 'Simple Value',
+        ComplexData : {
+            '@' : { type : 'colour' },
+            '#' : 'White',
+        },
+    });
 
-    var convert = require('data2xml')({ attrProp : '@', valProp  : '#', });
-    convert(
-        'TopLevelElement',
-        {
-            SimpleData : 'Simple Value',
-            ComplexData : {
-                '@' : { type : 'colour' },
-                '#' : 'White',
-            },
-        });
+=>
 
-    =>
-
-    <TopLevelLement xmlns="http://appsattic.com/xml/namespace">
-        <SimpleData>Simple Value</SimpleData>
-        <ComplexData type="color">White</ComplexData>
-    </TopLevelLement>
+<TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+    <SimpleData>Simple Value</SimpleData>
+    <ComplexData type="color">White</ComplexData>
+</TopLevelLement>
 ```
 
 If you want an array, just put one in there:
 
 ```
-    convert('TopLevelElement', {
-        MyArray : [
-            'Simple Value',
-            {
-                _attr : { type : 'colour' },
-                _value : 'White',
-            }
-        ],
-    });
+convert('TopLevelElement', {
+    MyArray : [
+        'Simple Value',
+        {
+            _attr : { type : 'colour' },
+            _value : 'White',
+        }
+    ],
+});
 
-    =>
+=>
 
-    <TopLevelLement xmlns="http://appsattic.com/xml/namespace">
-        <MyArray>Simple Value</MyArray>
-        <MyArray type="color">White</MyArray>
-    </TopLevelLement>
+<TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+    <MyArray>Simple Value</MyArray>
+    <MyArray type="color">White</MyArray>
+</TopLevelLement>
 ```
 
 Why data2xml
