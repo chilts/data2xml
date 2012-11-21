@@ -110,6 +110,33 @@ convert(
 </TopLevelLement>
 ```
 
+You can also specify what you want to do with undefined or null values. Choose between 'omit' (the default), 'empty' or
+'closed'.
+
+```
+var convert = require('data2xml')({ 'undefined' : 'empty', 'null'  : 'closed', });
+convert(
+    'TopLevelElement',
+    {
+        SimpleData : 'Simple Value',
+        ComplexData : {
+            '_attr' : { type : 'colour' },
+            '_value' : 'White',
+        },
+        Undefined : undefined,
+        Null      : null,
+    });
+
+=>
+
+<TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+    <SimpleData>Simple Value</SimpleData>
+    <ComplexData type="color">White</ComplexData>
+    <Undefined></Undefined>
+    <Null/>
+</TopLevelLement>
+```
+
 If you want an array, just put one in there:
 
 ```
