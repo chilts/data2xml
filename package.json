@@ -10,7 +10,8 @@
     "homepage": "https://github.com/appsattic/node-data2xml",
     "contributors": [],
     "devDependencies": {
-        "tap": ">= 0.0.11"
+        "tap": ">= 0.0.11",
+        "jshint": ">= 1.1.0"
     },
     "dependencies": {},
     "bundledDependencies": [],

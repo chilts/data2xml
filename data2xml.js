@@ -47,7 +47,7 @@ module.exports = function(opts) {
         xml += makeElement(name, data, opts);
         return xml;
     };
-}
+};
 
 function entitify(str) {
     str = '' + str;
