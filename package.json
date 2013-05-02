@@ -32,6 +32,6 @@
         "data", "xml", "data2xml", "datatoxml", "js2xml", "jstoxml", "json2xml", "jsontoxml"
     ],
     "scripts" : {
-        "test" : "./node_modules/tap/bin/tap.js test/*.js"
+        "test" : "node node_modules/tap/bin/tap.js test/*.js"
     }
 }
