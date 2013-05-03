@@ -9,16 +9,16 @@
 //
 // --------------------------------------------------------------------------------------------------------------------
 
-var tap = require("tap"),
+var tap = require('tap'),
     test = tap.test,
     plan = tap.plan;
 var data2xml;
 
 // --------------------------------------------------------------------------------------------------------------------
 
-test("load data2xml", function (t) {
-    data2xml = require("../data2xml");
-    t.ok(data2xml, "package loaded");
+test('load data2xml', function (t) {
+    data2xml = require('../data2xml');
+    t.ok(data2xml, 'package loaded');
 
     t.end();
 });

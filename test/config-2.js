@@ -9,7 +9,7 @@
 //
 // --------------------------------------------------------------------------------------------------------------------
 
-var tap = require("tap"),
+var tap = require('tap'),
     test = tap.test,
     plan = tap.plan;
 var data2xml = require('../data2xml');
@@ -46,7 +46,7 @@ var tests = [
 ];
 
 var convert1 = data2xml({ 'undefined' : 'empty', 'null' : 'closed' });
-test("1) some simple xml with undefined or null values", function (t) {
+test('1) some simple xml with undefined or null values', function (t) {
     tests.forEach(function(test) {
         var xml = convert1(test.element, test.data, { attrProp : '@', valProp : '#' });
         t.equal(xml, test.exp1, test.name);
@@ -56,7 +56,7 @@ test("1) some simple xml with undefined or null values", function (t) {
 });
 
 var convert2 = data2xml({ 'undefined' : 'closed', 'null' : 'empty' });
-test("2) some simple xml with undefined or null values", function (t) {
+test('2) some simple xml with undefined or null values', function (t) {
     tests.forEach(function(test) {
         var xml = convert2(test.element, test.data, { attrProp : '@', valProp : '#' });
         t.equal(xml, test.exp2, test.name);
