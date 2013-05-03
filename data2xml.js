@@ -122,7 +122,7 @@ function makeElement(name, data, opts) {
         // a piece of data on it's own can't have attributes
         return makeStartTag(name) + entitify(data) + makeEndTag(name);
     }
-    throw "Unknown data " + data;
+    throw 'Unknown data ' + data;
 }
 
 // --------------------------------------------------------------------------------------------------------------------

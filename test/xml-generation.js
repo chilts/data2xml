@@ -9,7 +9,7 @@
 //
 // --------------------------------------------------------------------------------------------------------------------
 
-var tap = require("tap"),
+var tap = require('tap'),
     test = tap.test,
     plan = tap.plan;
 var data2xml = require('../data2xml')({});
@@ -104,7 +104,7 @@ var tests = [
     },
 ];
 
-test("some simple xml", function (t) {
+test('some simple xml', function (t) {
     tests.forEach(function(test) {
         var xml = data2xml(test.element, test.data);
         t.equal(xml, test.exp, test.name);
