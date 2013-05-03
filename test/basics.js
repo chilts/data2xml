@@ -9,14 +9,14 @@
 //
 // --------------------------------------------------------------------------------------------------------------------
 
-var tap = require("tap"),
+var tap = require('tap'),
     test = tap.test,
     plan = tap.plan;
 var data2xml = require('../data2xml');
 
 // --------------------------------------------------------------------------------------------------------------------
 
-test("some simple entities", function (t) {
+test('some simple entities', function (t) {
     var test1 = data2xml.entitify('<hello>');
     var exp1 = '&lt;hello&gt;';
     t.equal(test1, exp1, 'LT and GT entitified correctly');
@@ -28,7 +28,7 @@ test("some simple entities", function (t) {
     t.end();
 });
 
-test("making some elements", function (t) {
+test('making some elements', function (t) {
     var test1 = data2xml.makeStartTag('tagme');
     var exp1 = '<tagme>';
     t.equal(test1, exp1, 'simple start tag');

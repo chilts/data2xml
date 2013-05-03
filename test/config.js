@@ -9,7 +9,7 @@
 //
 // --------------------------------------------------------------------------------------------------------------------
 
-var tap = require("tap"),
+var tap = require('tap'),
     test = tap.test,
     plan = tap.plan;
 var data2xml = require('../data2xml');
@@ -40,7 +40,7 @@ var tests = [
 
 var convert = data2xml({ attrProp : '@', valProp : '#' });
 
-test("some simple xml with '@' for attributes", function (t) {
+test('some simple xml with \'@\' for attributes', function (t) {
     tests.forEach(function(test) {
         var xml = convert(test.element, test.data, { attrProp : '@', valProp : '#' });
         t.equal(xml, test.exp, test.name);

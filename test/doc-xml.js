@@ -9,7 +9,7 @@
 //
 // --------------------------------------------------------------------------------------------------------------------
 
-var tap = require("tap"),
+var tap = require('tap'),
     test = tap.test,
     plan = tap.plan;
 var data2xml = require('../data2xml')();
@@ -26,18 +26,18 @@ var tests = [
             text: [
                 {
                     _attr: {
-                        "xml:lang": "de-DE"
+                        'xml:lang': 'de-DE'
                     },
-                    _value: "The german name"
+                    _value: 'The german name'
                 },
             ],
-            _value: "My app name",
+            _value: 'My app name',
         },
         exp : declaration + '<name>My app name<text xml:lang="de-DE">The german name</text></name>'
     },
 ];
 
-test("some simple xml", function (t) {
+test('some simple xml', function (t) {
     tests.forEach(function(test) {
         var xml = data2xml(test.element, test.data);
         t.equal(xml, test.exp, test.name);
