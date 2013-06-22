@@ -1,6 +1,6 @@
 data2xml is a data to XML converter with a nice interface (for NodeJS).
 
-[![Build Status](https://secure.travis-ci.org/appsattic/node-data2xml.png?branch=master)](http://travis-ci.org/appsattic/node-data2xml)
+[![Build Status](https://secure.travis-ci.org/chilts/data2xml.png?branch=master)](http://travis-ci.org/chilts/data2xml)
 
 Installation
 ------------
@@ -13,7 +13,7 @@ Info and Links:
 
 * npm info data2xml
 * https://npmjs.org/package/data2xml
-* https://github.com/appsattic/node-data2xml/
+* https://github.com/chilts/data2xml/
 
 Examples
 --------
@@ -45,7 +45,7 @@ var convert = require('data2xml')();
 convert(
     'TopLevelElement',
     {
-        _attr : { xmlns : 'http://appsattic.com/xml/namespace' }
+        _attr : { xmlns : 'http://chilts.org/xml/namespace' }
         SimpleElement : 'A simple element',
         ComplexElement : {
             A : 'Value A',
@@ -56,7 +56,7 @@ convert(
 
 =>
 
-<TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+<TopLevelLement xmlns="http://chilts.org/xml/namespace">
     <SimpleElement>A simple element</SimpleElement>
     <ComplexElement>
         <A>Value A</A>
@@ -82,7 +82,7 @@ convert(
 
 =>
 
-<TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+<TopLevelLement xmlns="http://chilts.org/xml/namespace">
     <SimpleData>Simple Value</SimpleData>
     <ComplexData type="color">White</ComplexData>
 </TopLevelLement>
@@ -104,7 +104,7 @@ convert(
 
 =>
 
-<TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+<TopLevelLement xmlns="http://chilts.org/xml/namespace">
     <SimpleData>Simple Value</SimpleData>
     <ComplexData type="color">White</ComplexData>
 </TopLevelLement>
@@ -129,7 +129,7 @@ convert(
 
 =>
 
-<TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+<TopLevelLement xmlns="http://chilts.org/xml/namespace">
     <SimpleData>Simple Value</SimpleData>
     <ComplexData type="color">White</ComplexData>
     <Undefined></Undefined>
@@ -152,7 +152,7 @@ convert('TopLevelElement', {
 
 =>
 
-<TopLevelLement xmlns="http://appsattic.com/xml/namespace">
+<TopLevelLement xmlns="http://chilts.org/xml/namespace">
     <MyArray>Simple Value</MyArray>
     <MyArray type="color">White</MyArray>
 </TopLevelLement>
@@ -197,6 +197,6 @@ To decide this, you need to know what this module doesn't do. It doesn't deal wi
 
 # License #
 
-MIT - http://appsattic.mit-license.org/2012/
+MIT - http://chilts.mit-license.org/2012/
 
 (Ends)

@@ -2,8 +2,8 @@
 //
 // data2xml.js - A data to XML converter with a nice interface (for NodeJS).
 //
-// Copyright (c) 2011 AppsAttic Ltd - http://www.appsattic.com/
-// Written by Andrew Chilton <chilts@appsattic.com>
+// Copyright (c) 2011 Andrew Chilton - http://chilts.org/
+// Written by Andrew Chilton <andychilton@gmail.com>
 //
 // License: http://opensource.org/licenses/MIT
 //
