@@ -9,9 +9,7 @@
 //
 // --------------------------------------------------------------------------------------------------------------------
 
-var tap = require('tap'),
-    test = tap.test,
-    plan = tap.plan;
+var test = require('tape');
 var data2xml = require('../data2xml')({});
 
 var declaration = '<?xml version="1.0" encoding="utf-8"?>\n';

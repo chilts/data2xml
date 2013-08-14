@@ -10,7 +10,7 @@
     "homepage": "https://github.com/chilts/data2xml",
     "contributors": [],
     "devDependencies": {
-        "tap": ">= 0.0.11",
+        "tape" : "1.0.x",
         "jshint": ">= 1.1.0"
     },
     "dependencies": {},
@@ -32,6 +32,6 @@
         "data", "xml", "data2xml", "datatoxml", "js2xml", "jstoxml", "json2xml", "jsontoxml"
     ],
     "scripts" : {
-        "test" : "node node_modules/tap/bin/tap.js test/*.js"
+        "test" : "set -e; for FILE in test/*.js; do node $FILE; done"
     }
 }
