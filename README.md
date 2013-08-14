@@ -36,8 +36,8 @@ var convert  = data2xml(); // or data2xml({})
 var convert = require('data2xml')();
 ```
 
-Note: in each example, I am leaving out the XML declaration. I am also pretty printing the output - the package doesn't
-do this for you!
+Note: in each example, I am leaving out the XML declaration (controlled by the `xmlDecl` option). I
+am also pretty printing the output - the package doesn't do this for you!
 
 ```
 var convert = require('data2xml')();
