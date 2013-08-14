@@ -12,7 +12,7 @@
 var valid = {
     'omit'   : true, // no element is output       : ''
     'empty'  : true, // an empty element is output : '<element></element>'
-    'closed' : true, // a closed element is output : '<element/>'
+    'closed' : true  // a closed element is output : '<element/>'
 };
 
 var defaults = {
@@ -20,6 +20,7 @@ var defaults = {
     'valProp'   : '_value',
     'undefined' : 'omit',
     'null'      : 'omit',
+    'xmlDecl'   : true
 };
 
 var xmlHeader = '<?xml version="1.0" encoding="utf-8"?>\n';
@@ -29,6 +30,11 @@ module.exports = function(opts) {
 
     opts.attrProp = opts.attrProp || defaults.attrProp;
     opts.valProp  = opts.valProp  || defaults.valProp;
+
+    if (typeof opts.xmlDecl === 'undefined') {
+        opts.xmlDecl = defaults.xmlDecl;
+    }
+
     if ( opts['undefined'] && valid[opts['undefined']] ) {
         // nothing, this is fine
     }
@@ -43,7 +49,7 @@ module.exports = function(opts) {
     }
 
     return function(name, data) {
-        var xml = xmlHeader;
+        var xml = opts.xmlDecl ? xmlHeader : '';
         xml += makeElement(name, data, opts);
         return xml;
     };
