@@ -20,7 +20,8 @@ var defaults = {
     'valProp'   : '_value',
     'undefined' : 'omit',
     'null'      : 'omit',
-    'xmlDecl'   : true
+    'xmlDecl'   : true,
+    'cdataProp' : '_cdata'
 };
 
 var xmlHeader = '<?xml version="1.0" encoding="utf-8"?>\n';
@@ -30,6 +31,7 @@ module.exports = function(opts) {
 
     opts.attrProp = opts.attrProp || defaults.attrProp;
     opts.valProp  = opts.valProp  || defaults.valProp;
+    opts.cdataProp = opts.cdataProp || defaults.cdataProp;
 
     if (typeof opts.xmlDecl === 'undefined') {
         opts.xmlDecl = defaults.xmlDecl;
@@ -114,9 +116,11 @@ function makeElement(name, data, opts) {
         element += makeStartTag(name, data[opts.attrProp]);
         if ( data[opts.valProp] ) {
             element += entitify(data[opts.valProp]);
+        }else if(data[opts.cdataProp]){
+            element += '<![CDATA['+data[opts.cdataProp]+']]>';
         }
         for (var el in data) {
-            if ( el === opts.attrProp || el === opts.valProp ) {
+            if ( el === opts.attrProp || el === opts.valProp || el === opts.cdataProp ) {
                 continue;
             }
             element += makeElement(el, data[el], opts);
