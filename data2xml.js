@@ -32,6 +32,7 @@ module.exports = function(opts) {
     opts.attrProp = opts.attrProp || defaults.attrProp;
     opts.valProp  = opts.valProp  || defaults.valProp;
     opts.cdataProp = opts.cdataProp || defaults.cdataProp;
+    opts.xmlHeader = opts.xmlHeader || xmlHeader;
 
     if (typeof opts.xmlDecl === 'undefined') {
         opts.xmlDecl = defaults.xmlDecl;
@@ -51,7 +52,7 @@ module.exports = function(opts) {
     }
 
     return function(name, data) {
-        var xml = opts.xmlDecl ? xmlHeader : '';
+        var xml = opts.xmlDecl ? opts.xmlHeader : '';
         xml += makeElement(name, data, opts);
         return xml;
     };
@@ -117,10 +118,10 @@ function makeElement(name, data, opts) {
         if ( data[opts.valProp] ) {
             element += entitify(data[opts.valProp]);
         }else if(data[opts.cdataProp]){
-            element += '<![CDATA['+data[opts.cdataProp]+']]>';
+            element += '<![CDATA['+data[opts.cdataProp].replace(']]>','')+']]>';
         }
         for (var el in data) {
-            if ( el === opts.attrProp || el === opts.valProp || el === opts.cdataProp ) {
+            if ( el === opts.attrProp || el === opts.valProp || el === opts.cdataProp) {
                 continue;
             }
             element += makeElement(el, data[el], opts);
@@ -143,3 +144,4 @@ module.exports.makeElement  = makeElement;
 module.exports.entitify     = entitify;
 
 // --------------------------------------------------------------------------------------------------------------------
+
