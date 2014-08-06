@@ -74,6 +74,7 @@ attributes you need to specify the value in the element object:
 convert(
     'TopLevelElement',
     {
+        _attr : { xmlns : 'http://chilts.org/xml/namespace' }
         SimpleData : 'Simple Value',
         ComplexData : {
             _attr : { type : 'colour' },
@@ -97,6 +98,7 @@ var convert = require('data2xml')({ attrProp : '@', valProp  : '#', });
 convert(
     'TopLevelElement',
     {
+        _attr : { xmlns : 'http://chilts.org/xml/namespace' }
         SimpleData : 'Simple Value',
         ComplexData : {
             '@' : { type : 'colour' },
