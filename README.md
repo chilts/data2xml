@@ -17,6 +17,12 @@ Info and Links:
 * https://npmjs.org/package/data2xml
 * https://github.com/chilts/data2xml/
 
+Stable
+------
+
+This package hasn't been significantly changed for a while. It is considered stable (it is not stagnant). Please use
+with all your might and enjoy it.
+
 Examples
 --------
 
