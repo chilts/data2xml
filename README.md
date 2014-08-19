@@ -168,6 +168,38 @@ convert('TopLevelElement', {
 </TopLevelLement>
 ```
 
+You can also enclose values in CDATA, by using `_cdata` in place of `_value`:
+
+```
+convert(
+    'TopLevelElement',
+    {
+        SimpleData : 'Simple Value',
+        ComplexData : {
+            _attr : { type : 'colour' },
+            _cdata : '<em>White</em>',
+        }
+    }
+);
+
+=>
+
+<TopLevelLement xmlns="http://chilts.org/xml/namespace">
+    <SimpleData>Simple Value</SimpleData>
+    <ComplexData type="color"><![CDATA[<em>White</em>]]></ComplexData>
+</TopLevelLement>
+```
+
+You can change the doctype declaration at initialization:
+
+```
+var data2xml = require('data2xml');
+var convert = data2xml({xmlheader: '<?xml version="1.0" standalone="yes" ?>\n'});
+
+convert(…);
+```
+
+
 Why data2xml
 ------------
 
@@ -197,7 +229,6 @@ To decide this, you need to know what this module doesn't do. It doesn't deal wi
 
 * mixed type elements (such as `<markup>Hello <strongly>World</strongly></markup>`)
 * pretty formatting - after all, you're probably sending this XML to another machine
-* CDATA elements ... though I probably _should_ add this (somehow)
 * data objects which are (or have) functions
 * ordered elements - if you pass me an object, it's members will be output in an order defined by 'for m in object'
 * comments
