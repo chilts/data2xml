@@ -100,6 +100,22 @@ var tests = [
         ] },
         exp : declaration + '<topelement><item type="a">val1</item><item type="b">val2</item><item>val3</item><item>val4</item></topelement>'
     },
+	{
+		name : 'element with CDATA',
+		element : 'name',
+		data : {
+			text: [
+				{
+					_attr: {
+						'xml:lang': 'de-DE'
+					},
+					_cdata: 'Some text with <em>unescaped</em> HTML data.'
+				},
+			],
+			_value: 'My app name',
+		},
+		exp : declaration + '<name>My app name<text xml:lang="de-DE"><![CDATA[Some text with <em>unescaped</em> HTML data.]]></text></name>'
+	},
 ];
 
 test('some simple xml', function (t) {
