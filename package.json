@@ -1,7 +1,7 @@
 {
     "name": "data2xml",
     "description": "A data to XML converter with a nice interface (for NodeJS).",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "author": {
         "name":"Andrew Chilton",
         "email":"andychilton@gmail.com",
