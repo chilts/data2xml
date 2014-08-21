@@ -139,10 +139,10 @@ function makeElement(name, data, opts) {
             valElement = data[opts.valProp];
             if (typeof valElement === 'undefined') {
                 return undefinedElement(name, data[opts.attrProp], opts);
-                
+
             } else if (valElement === null) {
                 return nullElement(name, data[opts.attrProp], opts);
-            } 
+            }
         }
         element += makeStartTag(name, data[opts.attrProp]);
         if (valElement) {
@@ -163,7 +163,6 @@ function makeElement(name, data, opts) {
     }
     throw 'Unknown data ' + data;
 }
-
 
 // --------------------------------------------------------------------------------------------------------------------
 
