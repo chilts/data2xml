@@ -66,14 +66,53 @@ function entitify(str) {
     return str;
 }
 
+function makeElementAttrs(attr) {
+    var attributes = '';
+    for(var a in attr) {
+        attributes += ' ' + a + '="' + entitify(attr[a]) + '"';
+    }
+    return attributes;
+}
+
 function makeStartTag(name, attr) {
     attr = attr || {};
     var tag = '<' + name;
-    for(var a in attr) {
-        tag += ' ' + a + '="' + entitify(attr[a]) + '"';
-    }
+    tag += makeElementAttrs(attr);
     tag += '>';
     return tag;
+}
+
+function makeClosedElement(name, attr) {
+    attr = attr || {};
+    var tag = '<' + name;
+    tag += makeElementAttrs(attr);
+    tag += '/>';
+    return tag;
+}
+
+function undefinedElement(name, attr, opts) {
+    if ( opts['undefined'] === 'omit' ) {
+        return '';
+    }
+    if ( opts['undefined'] === 'empty' ) {
+        return makeStartTag(name, attr) + makeEndTag(name);
+    }
+    else if ( opts['undefined'] === 'closed' ) {
+        return makeClosedElement(name, attr);
+    }
+
+}
+
+function nullElement(name, attr, opts) {
+    if ( opts['null'] === 'omit' ) {
+        return '';
+    }
+    if ( opts['null'] === 'empty' ) {
+        return makeStartTag(name, attr) + makeEndTag(name);
+    }
+    else if ( opts['null'] === 'closed' ) {
+        return makeClosedElement(name, attr);
+    }
 }
 
 function makeEndTag(name) {
@@ -89,31 +128,25 @@ function makeElement(name, data, opts) {
         return element;
     }
     else if ( typeof data === 'undefined' ) {
-        if ( opts['undefined'] === 'omit' ) {
-            return '';
-        }
-        if ( opts['undefined'] === 'empty' ) {
-            return makeStartTag(name) + makeEndTag(name);
-        }
-        else if ( opts['undefined'] === 'closed' ) {
-            return '<' + name + '/>';
-        }
+        return undefinedElement(name, null, opts);
     }
     else if ( data === null ) {
-        if ( opts['null'] === 'omit' ) {
-            return '';
-        }
-        if ( opts['null'] === 'empty' ) {
-            return makeStartTag(name) + makeEndTag(name);
-        }
-        else if ( opts['null'] === 'closed' ) {
-            return '<' + name + '/>';
-        }
+        return nullElement(name, null, opts);
     }
     else if ( typeof data === 'object' ) {
+        var valElement;
+        if (data.hasOwnProperty(opts.valProp)) {
+            valElement = data[opts.valProp];
+            if (typeof valElement === 'undefined') {
+                return undefinedElement(name, data[opts.attrProp], opts);
+
+            } else if (valElement === null) {
+                return nullElement(name, data[opts.attrProp], opts);
+            }
+        }
         element += makeStartTag(name, data[opts.attrProp]);
-        if ( data[opts.valProp] ) {
-            element += entitify(data[opts.valProp]);
+        if (valElement) {
+            element += entitify(valElement);
         }
         for (var el in data) {
             if ( el === opts.attrProp || el === opts.valProp ) {

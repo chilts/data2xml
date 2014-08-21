@@ -30,6 +30,30 @@ var tests = [
         exp2 : declaration + '<topelement xmlns="http://www.appsattic.com/xml/namespace"><second>value</second><undefined/><null></null></topelement>'
     },
     {
+        name : 'element with attributes and value undefined',
+        element : 'topelement',
+        data : {
+            '_attr' : { xmlns : 'http://www.appsattic.com/xml/namespace' },
+            second : 'value',
+            'undefined' : {"_attr": {"key1": "something", "key2": "else"}, "_value": undefined},
+            'null' : null,
+        },
+        exp1 : declaration + '<topelement xmlns="http://www.appsattic.com/xml/namespace"><second>value</second><undefined key1="something" key2="else"></undefined><null/></topelement>',
+        exp2 : declaration + '<topelement xmlns="http://www.appsattic.com/xml/namespace"><second>value</second><undefined key1="something" key2="else"/><null></null></topelement>'
+    },
+    {
+        name : 'element with attributes and value null',
+        element : 'topelement',
+        data : {
+            '_attr' : { xmlns : 'http://www.appsattic.com/xml/namespace' },
+            second : 'value',
+            'undefined' : undefined,
+            'null' : {"_attr":{"key1":"value", "key2": "value2"}, "_value": null},
+        },
+        exp1 : declaration + '<topelement xmlns="http://www.appsattic.com/xml/namespace"><second>value</second><undefined></undefined><null key1="value" key2="value2"/></topelement>',
+        exp2 : declaration + '<topelement xmlns="http://www.appsattic.com/xml/namespace"><second>value</second><undefined/><null key1="value" key2="value2"></null></topelement>'
+    },
+    {
         name : 'complex 4 element array with some attributes',
         element : 'topelement',
         data : { item : [
