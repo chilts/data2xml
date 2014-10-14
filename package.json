@@ -1,37 +1,38 @@
 {
-    "name": "data2xml",
-    "description": "A data to XML converter with a nice interface (for NodeJS).",
-    "version": "1.2.0",
-    "author": {
-        "name":"Andrew Chilton",
-        "email":"andychilton@gmail.com",
-        "url":"http://chilts.org/"
-    },
-    "homepage": "https://github.com/chilts/data2xml",
-    "contributors": [],
-    "devDependencies": {
-        "tape" : "1.0.x",
-        "jshint": ">= 1.1.0"
-    },
-    "dependencies": {},
-    "bundledDependencies": [],
-    "main": "data2xml.js",
-    "directories": {},
-    "engines": {
-        "node": "*"
-    },
-    "repository": {
-        "type" : "git",
-        "url": "git://github.com/chilts/data2xml.git"
-    },
-    "licenses": [{
-        "type": "MIT",
-        "url": "http://github.com/chilts/data2xml/raw/master/LICENSE"
-    }],
-    "keywords": [
-        "data", "xml", "data2xml", "datatoxml", "js2xml", "jstoxml", "json2xml", "jsontoxml"
-    ],
-    "scripts" : {
-        "test" : "set -e; for FILE in test/*.js; do node $FILE; done"
+  "name": "data2xml",
+  "description": "A data to XML converter with a nice interface (for NodeJS).",
+  "version": "1.2.0",
+  "main": "data2xml.js",
+  "homepage": "https://github.com/chilts/data2xml",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/chilts/data2xml.git"
+  },
+  "scripts": {
+    "test": "set -e; for FILE in test/*.js; do node $FILE; done"
+  },
+  "devDependencies": {
+    "tape": "^3.0.0"
+  },
+  "author": {
+    "name": "Andrew Chilton",
+    "email": "andychilton@gmail.com",
+    "url": "http://chilts.org/"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/chilts/data2xml/raw/master/LICENSE"
     }
+  ],
+  "keywords": [
+    "data",
+    "xml",
+    "data2xml",
+    "datatoxml",
+    "js2xml",
+    "jstoxml",
+    "json2xml",
+    "jsontoxml"
+  ]
 }
