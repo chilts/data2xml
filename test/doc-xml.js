@@ -10,15 +10,14 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 var test = require('tape');
-var data2xml = require('../data2xml')();
-
-var declaration = '<?xml version="1.0" encoding="utf-8"?>\n';
+var data2xml = require('../data2xml');
 
 // --------------------------------------------------------------------------------------------------------------------
 
 var tests = [
     {
         name : 'document natured XML',
+		declaration : '<?xml version="1.0" encoding="utf-8"?>\n',
         element : 'name',
         data : {
             text: [
@@ -31,13 +30,31 @@ var tests = [
             ],
             _value: 'My app name',
         },
-        exp : declaration + '<name>My app name<text xml:lang="de-DE">The german name</text></name>'
+        exp : '<?xml version="1.0" encoding="utf-8"?>\n<name>My app name<text xml:lang="de-DE">The german name</text></name>'
+    },
+	{
+        name : 'XML declared standalone',
+		declaration : '<?xml version="1.0" standalone="yes" ?>\n',
+        element : 'name',
+        data : {
+            text: [
+                {
+                    _attr: {
+                        'xml:lang': 'de-DE'
+                    },
+                    _value: 'The german name'
+                },
+            ],
+            _value: 'My app name',
+        },
+        exp : '<?xml version="1.0" standalone="yes" ?>\n<name>My app name<text xml:lang="de-DE">The german name</text></name>'
     },
 ];
 
 test('some simple xml', function (t) {
     tests.forEach(function(test) {
-        var xml = data2xml(test.element, test.data);
+		var convert = data2xml({xmlHeader: test.declaration});
+        var xml = convert(test.element, test.data);
         t.equal(xml, test.exp, test.name);
     });
 
