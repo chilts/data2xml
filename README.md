@@ -244,6 +244,15 @@ To decide this, you need to know what this module doesn't do. It doesn't deal wi
 * entity references
 * all the other stuff you don't care about when dealing with data
 
+## AUTHOR ##
+
+Written by [Andrew Chilton](http://chilts.org/):
+
+* [Blog](http://chilts.org/)
+* [GitHub](https://github.com/chilts)
+* [Twitter](https://twitter.com/andychilton)
+* [Instagram](http://instagram.com/thechilts)
+
 # License #
 
 MIT - http://chilts.mit-license.org/2012/
