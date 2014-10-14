@@ -47,7 +47,7 @@ var convert = require('data2xml')();
 Note: in each example, I am leaving out the XML declaration (controlled by the `xmlDecl` option). I
 am also pretty printing the output - the package doesn't do this for you!
 
-```
+```js
 var convert = require('data2xml')();
 
 convert(
@@ -61,9 +61,11 @@ convert(
         },
     }
 );
+```
 
-=>
+Will produce:
 
+```xml
 <TopLevelLement xmlns="http://chilts.org/xml/namespace">
     <SimpleElement>A simple element</SimpleElement>
     <ComplexElement>
@@ -76,7 +78,7 @@ convert(
 If you want an element containing data you can do it one of two ways. A simple piece of data will work, but if you want
 attributes you need to specify the value in the element object. You can also specify a CDATA element too.
 
-```
+```js
 convert(
     'TopLevelElement',
     {
@@ -91,9 +93,11 @@ convert(
         },
     }
 );
+```
 
-=>
+Will produce:
 
+```xml
 <TopLevelLement xmlns="http://chilts.org/xml/namespace">
     <SimpleData>Simple Value</SimpleData>
     <ComplexData type="color">White</ComplexData>
@@ -103,7 +107,7 @@ convert(
 
 You can also specify which properties your attributes and values are in (using the same example as above):
 
-```
+```js
 var convert = require('data2xml')({ attrProp : '@', valProp  : '#', cdataProp : '%' });
 convert(
     'TopLevelElement',
@@ -118,9 +122,11 @@ convert(
             '%' : 'This is <bold>bold</bold>.',
         },
     });
+```
 
-=>
+Will produce:
 
+```xml
 <TopLevelLement xmlns="http://chilts.org/xml/namespace">
     <SimpleData>Simple Value</SimpleData>
     <ComplexData type="color">White</ComplexData>
@@ -131,7 +137,7 @@ convert(
 You can also specify what you want to do with undefined or null values. Choose between 'omit' (the default), 'empty' or
 'closed'.
 
-```
+```js
 var convert = require('data2xml')({ 'undefined' : 'empty', 'null'  : 'closed', });
 convert(
     'TopLevelElement',
@@ -144,9 +150,11 @@ convert(
         Undefined : undefined,
         Null      : null,
     });
+```
 
-=>
+Will produce:
 
+```xml
 <TopLevelLement xmlns="http://chilts.org/xml/namespace">
     <SimpleData>Simple Value</SimpleData>
     <ComplexData type="color">White</ComplexData>
@@ -157,7 +165,7 @@ convert(
 
 If you want an array, just put one in there:
 
-```
+```js
 convert('TopLevelElement', {
     MyArray : [
         'Simple Value',
@@ -167,9 +175,11 @@ convert('TopLevelElement', {
         }
     ],
 });
+```
 
-=>
+Will produce:
 
+```xml
 <TopLevelLement xmlns="http://chilts.org/xml/namespace">
     <MyArray>Simple Value</MyArray>
     <MyArray type="color">White</MyArray>
@@ -178,7 +188,7 @@ convert('TopLevelElement', {
 
 You can also enclose values in CDATA, by using `_cdata` in place of `_value`:
 
-```
+```js
 convert(
     'TopLevelElement',
     {
@@ -189,9 +199,11 @@ convert(
         }
     }
 );
+```
 
-=>
+Will produce:
 
+```xml
 <TopLevelLement xmlns="http://chilts.org/xml/namespace">
     <SimpleData>Simple Value</SimpleData>
     <ComplexData type="color"><![CDATA[<em>White</em>]]></ComplexData>
