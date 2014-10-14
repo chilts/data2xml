@@ -74,7 +74,7 @@ convert(
 ```
 
 If you want an element containing data you can do it one of two ways. A simple piece of data will work, but if you want
-attributes you need to specify the value in the element object:
+attributes you need to specify the value in the element object. You can also specify a CDATA element too.
 
 ```
 convert(
@@ -85,7 +85,10 @@ convert(
         ComplexData : {
             _attr : { type : 'colour' },
             _value : 'White',
-        }
+        },
+        CData : {
+            _cdata : 'This is<bold>bold</bold>.',
+        },
     }
 );
 
@@ -94,13 +97,14 @@ convert(
 <TopLevelLement xmlns="http://chilts.org/xml/namespace">
     <SimpleData>Simple Value</SimpleData>
     <ComplexData type="color">White</ComplexData>
+    <CData><![CDATA[This is<bold>bold</bold>.]]></CData>
 </TopLevelLement>
 ```
 
 You can also specify which properties your attributes and values are in (using the same example as above):
 
 ```
-var convert = require('data2xml')({ attrProp : '@', valProp  : '#', });
+var convert = require('data2xml')({ attrProp : '@', valProp  : '#', cdataProp : '%' });
 convert(
     'TopLevelElement',
     {
@@ -110,6 +114,9 @@ convert(
             '@' : { type : 'colour' },
             '#' : 'White',
         },
+        CData : {
+            '%' : 'This is <bold>bold</bold>.',
+        },
     });
 
 =>
@@ -117,6 +124,7 @@ convert(
 <TopLevelLement xmlns="http://chilts.org/xml/namespace">
     <SimpleData>Simple Value</SimpleData>
     <ComplexData type="color">White</ComplexData>
+    <CData><![CDATA[This is<bold>bold</bold>.]]></CData>
 </TopLevelLement>
 ```
 
