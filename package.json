@@ -19,12 +19,7 @@
     "email": "andychilton@gmail.com",
     "url": "http://chilts.org/"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://github.com/chilts/data2xml/raw/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
   "keywords": [
     "data",
     "xml",
