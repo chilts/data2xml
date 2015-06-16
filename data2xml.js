@@ -153,7 +153,9 @@ function makeElement(name, data, opts) {
             }
         }
 
-        element += makeStartTag(name, data[opts.attrProp]);
+        if (name) {
+            element += makeStartTag(name, data[opts.attrProp]);
+        }
 
         if (valElement) {
             if (typeof valElement === 'object') {
@@ -174,7 +176,11 @@ function makeElement(name, data, opts) {
             }
             element += makeElement(el, data[el], opts);
         }
-        element += makeEndTag(name);
+
+        if (name) {
+            element += makeEndTag(name);
+        }
+
         return element;
     }
     else {
