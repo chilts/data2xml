@@ -10,18 +10,19 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 var valid = {
-    'omit'   : true, // no element is output       : ''
-    'empty'  : true, // an empty element is output : '<element></element>'
-    'closed' : true  // a closed element is output : '<element/>'
+    'omit': true, // no element is output       : ''
+    'empty': true, // an empty element is output : '<element></element>'
+    'closed': true  // a closed element is output : '<element/>'
 };
 
 var defaults = {
-    'attrProp'  : '_attr',
-    'valProp'   : '_value',
-    'undefined' : 'omit',
-    'null'      : 'omit',
-    'xmlDecl'   : true,
-    'cdataProp' : '_cdata'
+    'attrProp': '_attr',
+    'valProp': '_value',
+    'undefined': 'omit',
+    'null': 'omit',
+    'xmlDecl': true,
+    'cdataProp': '_cdata',
+    'xmlProp': '_xml'
 };
 
 var xmlHeader = '<?xml version="1.0" encoding="utf-8"?>\n';
@@ -30,21 +31,22 @@ module.exports = function(opts) {
     opts = opts || {};
 
     opts.attrProp = opts.attrProp || defaults.attrProp;
-    opts.valProp  = opts.valProp  || defaults.valProp;
+    opts.valProp = opts.valProp || defaults.valProp;
     opts.cdataProp = opts.cdataProp || defaults.cdataProp;
     opts.xmlHeader = opts.xmlHeader || xmlHeader;
+    opts.xmlProp = opts.xmlProp || defaults.xmlProp;
 
     if (typeof opts.xmlDecl === 'undefined') {
         opts.xmlDecl = defaults.xmlDecl;
     }
 
-    if ( opts['undefined'] && valid[opts['undefined']] ) {
+    if (opts['undefined'] && valid[opts['undefined']]) {
         // nothing, this is fine
     }
     else {
         opts['undefined'] = defaults['undefined'];
     }
-    if ( opts['null'] && valid[opts['null']] ) {
+    if (opts['null'] && valid[opts['null']]) {
         // nothing, this is fine
     }
     else {
@@ -61,17 +63,17 @@ module.exports = function(opts) {
 function entitify(str) {
     str = '' + str;
     str = str
-        .replace(/&/g, '&amp;')
-        .replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;')
-        .replace(/'/g, '&apos;')
-        .replace(/"/g, '&quot;');
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/'/g, '&apos;')
+      .replace(/"/g, '&quot;');
     return str;
 }
 
 function makeElementAttrs(attr) {
     var attributes = '';
-    for(var a in attr) {
+    for (var a in attr) {
         attributes += ' ' + a + '="' + entitify(attr[a]) + '"';
     }
     return attributes;
@@ -94,26 +96,26 @@ function makeClosedElement(name, attr) {
 }
 
 function undefinedElement(name, attr, opts) {
-    if ( opts['undefined'] === 'omit' ) {
+    if (opts['undefined'] === 'omit') {
         return '';
     }
-    if ( opts['undefined'] === 'empty' ) {
+    if (opts['undefined'] === 'empty') {
         return makeStartTag(name, attr) + makeEndTag(name);
     }
-    else if ( opts['undefined'] === 'closed' ) {
+    else if (opts['undefined'] === 'closed') {
         return makeClosedElement(name, attr);
     }
 
 }
 
 function nullElement(name, attr, opts) {
-    if ( opts['null'] === 'omit' ) {
+    if (opts['null'] === 'omit') {
         return '';
     }
-    if ( opts['null'] === 'empty' ) {
+    if (opts['null'] === 'empty') {
         return makeStartTag(name, attr) + makeEndTag(name);
     }
-    else if ( opts['null'] === 'closed' ) {
+    else if (opts['null'] === 'closed') {
         return makeClosedElement(name, attr);
     }
 }
@@ -124,57 +126,77 @@ function makeEndTag(name) {
 
 function makeElement(name, data, opts) {
     var element = '';
-    if ( Array.isArray(data) ) {
+
+    if (Array.isArray(data)) {
         data.forEach(function(v) {
             element += makeElement(name, v, opts);
         });
         return element;
     }
-    else if ( typeof data === 'undefined' ) {
+    else if (typeof data === 'undefined') {
         return undefinedElement(name, null, opts);
     }
-    else if ( data === null ) {
+    else if (data === null) {
         return nullElement(name, null, opts);
     }
-    else if ( typeof data === 'object' ) {
+    else if (typeof data === 'object') {
         var valElement;
+
         if (data.hasOwnProperty(opts.valProp)) {
             valElement = data[opts.valProp];
+
             if (typeof valElement === 'undefined') {
                 return undefinedElement(name, data[opts.attrProp], opts);
-
-            } else if (valElement === null) {
+            }
+            else if (valElement === null) {
                 return nullElement(name, data[opts.attrProp], opts);
             }
         }
-        element += makeStartTag(name, data[opts.attrProp]);
-        if (valElement) {
-            element += entitify(valElement);
-        }else if(data[opts.cdataProp]){
-            element += '<![CDATA['+data[opts.cdataProp].replace(']]>','')+']]>';
+
+        if (name) {
+            element += makeStartTag(name, data[opts.attrProp]);
         }
+
+        if (valElement) {
+            if (typeof valElement === 'object') {
+                if (valElement.hasOwnProperty(opts.xmlProp)) {
+                    element += valElement[opts.xmlProp];
+                }
+            } else {
+                element += entitify(valElement);
+            }
+        }
+        else if (data[opts.cdataProp]) {
+            element += '<![CDATA[' + data[opts.cdataProp].replace(']]>', '') + ']]>';
+        }
+
         for (var el in data) {
-            if ( el === opts.attrProp || el === opts.valProp || el === opts.cdataProp) {
+            if (el === opts.attrProp || el === opts.valProp || el === opts.cdataProp) {
                 continue;
             }
             element += makeElement(el, data[el], opts);
         }
-        element += makeEndTag(name);
+
+        if (name) {
+            element += makeEndTag(name);
+        }
+
         return element;
     }
     else {
         // a piece of data on it's own can't have attributes
         return makeStartTag(name) + entitify(data) + makeEndTag(name);
     }
+
     throw 'Unknown data ' + data;
 }
 
 // --------------------------------------------------------------------------------------------------------------------
 
 module.exports.makeStartTag = makeStartTag;
-module.exports.makeEndTag   = makeEndTag;
-module.exports.makeElement  = makeElement;
-module.exports.entitify     = entitify;
+module.exports.makeEndTag = makeEndTag;
+module.exports.makeElement = makeElement;
+module.exports.entitify = entitify;
 
 // --------------------------------------------------------------------------------------------------------------------
 
