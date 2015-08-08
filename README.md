@@ -23,6 +23,9 @@ Stable
 This package hasn't been significantly changed for a while. It is considered stable (it is not stagnant). Please use
 with all your might and enjoy it.
 
+Note: this package doesn't depend on any others (except testing in development). This is on purpose so that it doesn't
+have it's foundation move under it's feet.
+
 Examples
 --------
 
