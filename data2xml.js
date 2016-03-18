@@ -123,6 +123,8 @@ function makeEndTag(name) {
 }
 
 function makeElement(name, data, opts) {
+    var cdataRegExp = /]]\>/g;
+
     var element = '';
     if ( Array.isArray(data) ) {
         data.forEach(function(v) {
@@ -140,26 +142,33 @@ function makeElement(name, data, opts) {
         var valElement;
         if (data.hasOwnProperty(opts.valProp)) {
             valElement = data[opts.valProp];
+
             if (typeof valElement === 'undefined') {
                 return undefinedElement(name, data[opts.attrProp], opts);
+            }
 
-            } else if (valElement === null) {
+            if (valElement === null) {
                 return nullElement(name, data[opts.attrProp], opts);
             }
         }
         element += makeStartTag(name, data[opts.attrProp]);
+
         if (valElement) {
             element += entitify(valElement);
-        }else if(data[opts.cdataProp]){
-            element += '<![CDATA['+data[opts.cdataProp].replace(']]>',']]]]><![CDATA[>')+']]>';
         }
+        else if ( data[opts.cdataProp] ) {
+            element += '<![CDATA[' + data[opts.cdataProp].replace(cdataRegExp, ']]]]><![CDATA[>') + ']]>';
+        }
+
         for (var el in data) {
             if ( el === opts.attrProp || el === opts.valProp || el === opts.cdataProp) {
                 continue;
             }
             element += makeElement(el, data[el], opts);
         }
+
         element += makeEndTag(name);
+
         return element;
     }
     else {

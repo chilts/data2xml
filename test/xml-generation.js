@@ -125,12 +125,12 @@ var tests = [
 					_attr: {
 						'xml:lang': 'de-DE'
 					},
-					_cdata: 'Some text with ]]> inside it.'
+					_cdata: 'Some text with ]]> twice ]]> inside it.'
 				},
 			],
 			_value: 'My app name',
 		},
-		exp : declaration + '<name>My app name<text xml:lang="de-DE"><![CDATA[Some text with ]]]]><![CDATA[> inside it.]]></text></name>'
+		exp : declaration + '<name>My app name<text xml:lang="de-DE"><![CDATA[Some text with ]]]]><![CDATA[> twice ]]]]><![CDATA[> inside it.]]></text></name>'
 	},
 ];
 
