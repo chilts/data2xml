@@ -151,7 +151,7 @@ function makeElement(name, data, opts) {
         if (valElement) {
             element += entitify(valElement);
         }else if(data[opts.cdataProp]){
-            element += '<![CDATA['+data[opts.cdataProp].replace(']]>','')+']]>';
+            element += '<![CDATA['+data[opts.cdataProp].replace(']]>',']]]]><![CDATA[>')+']]>';
         }
         for (var el in data) {
             if ( el === opts.attrProp || el === opts.valProp || el === opts.cdataProp) {

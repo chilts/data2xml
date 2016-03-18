@@ -9,7 +9,7 @@ Installation
 
 The easiest way to get it is via npm:
 
-    npm install data2xml
+    npm install --save data2xml
 
 Info and Links:
 
@@ -26,6 +26,29 @@ with all your might and enjoy it.
 Note: this package doesn't depend on any others (except testing in development). This is on purpose so that it doesn't
 have it's foundation move under it's feet.
 
+Synopsis
+--------
+
+```
+var data2xml = require('data2xml');
+
+var convert = data2xml();
+
+var xml1 = convert('Message', 'Hello, World!');
+console.log(xml1);
+// ->
+// <?xml version="1.0" encoding="utf-8"?>
+// <Message>Hello, World!</Message>
+
+var xml2 = convert('Message', {
+  Text: 'Hello, World!'
+});
+console.log(xml2);
+// ->
+// <?xml version="1.0" encoding="utf-8"?>
+// <Message><Text>Hello, World!</Text></Message>
+```
+
 Examples
 --------
 
@@ -40,18 +63,11 @@ var data2xml = require('data2xml');
 var convert  = data2xml(); // or data2xml({})
 ```
 
-... is the same as ...
-
-
-```
-var convert = require('data2xml')();
-```
-
 Note: in each example, I am leaving out the XML declaration (controlled by the `xmlDecl` option). I
 am also pretty printing the output - the package doesn't do this for you!
 
 ```js
-var convert = require('data2xml')();
+var convert = require('data2xml')({ xmlDecl : false });
 
 convert(
     'TopLevelElement',

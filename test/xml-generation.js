@@ -116,6 +116,22 @@ var tests = [
 		},
 		exp : declaration + '<name>My app name<text xml:lang="de-DE"><![CDATA[Some text with <em>unescaped</em> HTML data.]]></text></name>'
 	},
+	{
+		name : 'element with CDATA containing a ]]>',
+		element : 'name',
+		data : {
+			text: [
+				{
+					_attr: {
+						'xml:lang': 'de-DE'
+					},
+					_cdata: 'Some text with ]]> inside it.'
+				},
+			],
+			_value: 'My app name',
+		},
+		exp : declaration + '<name>My app name<text xml:lang="de-DE"><![CDATA[Some text with ]]]]><![CDATA[> inside it.]]></text></name>'
+	},
 ];
 
 test('some simple xml', function (t) {
