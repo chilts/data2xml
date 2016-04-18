@@ -12,7 +12,7 @@
     "test": "set -e; for FILE in test/*.js; do node $FILE; done"
   },
   "devDependencies": {
-    "tape": "^3.0.0"
+    "tape": "^4.5.1"
   },
   "author": {
     "name": "Andrew Chilton",
@@ -29,8 +29,5 @@
     "jstoxml",
     "json2xml",
     "jsontoxml"
-  ],
-  "dependencies": {
-    "tape": "^4.5.1"
-  }
+  ]
 }
