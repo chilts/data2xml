@@ -1,8 +1,17 @@
 cache:
   paths:
-  - node_modules/
+  - node_modules
 
-test:unit:
+test:unit-node8:
+  image: node:8
+  script:
+    - node --version
+    - npm --version
+    - npm install
+    - npm test
+
+test:unit-node10:
+  image: node:10
   script:
     - node --version
     - npm --version
