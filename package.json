@@ -1,7 +1,7 @@
 {
   "name": "data2xml",
   "description": "A data to XML converter with a nice interface (for NodeJS).",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "main": "data2xml.js",
   "homepage": "https://gitlab.com/chilts/data2xml",
   "repository": {
