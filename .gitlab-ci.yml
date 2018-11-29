@@ -1,0 +1,10 @@
+cache:
+  paths:
+  - node_modules/
+
+test:unit:
+  script:
+    - node --version
+    - npm --version
+    - npm install
+    - npm test
