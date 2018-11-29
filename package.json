@@ -3,10 +3,10 @@
   "description": "A data to XML converter with a nice interface (for NodeJS).",
   "version": "1.2.5",
   "main": "data2xml.js",
-  "homepage": "https://github.com/chilts/data2xml",
+  "homepage": "https://gitlab.com/chilts/data2xml",
   "repository": {
     "type": "git",
-    "url": "git://github.com/chilts/data2xml.git"
+    "url": "git://gitlab.com/chilts/data2xml.git"
   },
   "scripts": {
     "test": "set -e; for FILE in test/*.js; do node $FILE; done"
@@ -17,9 +17,8 @@
   "author": {
     "name": "Andrew Chilton",
     "email": "andychilton@gmail.com",
-    "url": "http://chilts.org/"
+    "url": "https://chilts.org/"
   },
-  "license": "MIT",
   "keywords": [
     "data",
     "xml",
@@ -29,5 +28,6 @@
     "jstoxml",
     "json2xml",
     "jsontoxml"
-  ]
+  ],
+  "license": "MIT"
 }
