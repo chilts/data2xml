@@ -15,7 +15,7 @@ Info and Links:
 
 * npm info data2xml
 * https://npmjs.org/package/data2xml
-* https://github.com/chilts/data2xml/
+* https://gitlab.com/chilts/data2xml/
 
 Stable
 ------
@@ -279,10 +279,9 @@ To decide this, you need to know what this module doesn't do. It doesn't deal wi
 
 Written by [Andrew Chilton](http://chilts.org/):
 
-* [Blog](http://chilts.org/)
-* [GitHub](https://github.com/chilts)
+* [Blog](https://chilts.org/)
 * [Twitter](https://twitter.com/andychilton)
-* [Instagram](http://instagram.com/thechilts)
+* [GitLab](https://gitlab.com/chilts)
 
 # License #
 
