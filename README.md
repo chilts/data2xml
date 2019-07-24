@@ -233,7 +233,7 @@ You can change the doctype declaration at initialization:
 
 ```
 var data2xml = require('data2xml');
-var convert = data2xml({xmlheader: '<?xml version="1.0" standalone="yes" ?>\n'});
+var convert = data2xml({xmlHeader: '<?xml version="1.0" standalone="yes" ?>\n'});
 
 convert(…);
 ```
