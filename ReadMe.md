@@ -238,7 +238,6 @@ var convert = data2xml({xmlHeader: '<?xml version="1.0" standalone="yes" ?>\n'})
 convert(…);
 ```
 
-
 Why data2xml
 ------------
 
@@ -275,13 +274,38 @@ To decide this, you need to know what this module doesn't do. It doesn't deal wi
 * entity references
 * all the other stuff you don't care about when dealing with data
 
-## AUTHOR ##
+## Author ##
 
-Written by [Andrew Chilton](http://chilts.org/):
+```
+$ npx chilts
 
-* [Blog](https://chilts.org/)
-* [Twitter](https://twitter.com/andychilton)
-* [GitLab](https://gitlab.com/chilts)
+   ╒════════════════════════════════════════════════════╕
+   │                                                    │
+   │   Andrew Chilton (Personal)                        │
+   │   -------------------------                        │
+   │                                                    │
+   │          Email : andychilton@gmail.com             │
+   │            Web : https://chilts.org                │
+   │        Twitter : https://twitter.com/andychilton   │
+   │         GitHub : https://github.com/chilts         │
+   │         GitLab : https://gitlab.org/chilts         │
+   │                                                    │
+   │   Apps Attic Ltd (My Company)                      │
+   │   ---------------------------                      │
+   │                                                    │
+   │          Email : chilts@appsattic.com              │
+   │            Web : https://appsattic.com             │
+   │        Twitter : https://twitter.com/AppsAttic     │
+   │         GitLab : https://gitlab.com/appsattic      │
+   │                                                    │
+   │   Node.js / npm                                    │
+   │   -------------                                    │
+   │                                                    │
+   │        Profile : https://www.npmjs.com/~chilts     │
+   │           Card : $ npx chilts                      │
+   │                                                    │
+   ╘════════════════════════════════════════════════════╛
+```
 
 # License #
 
