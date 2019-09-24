@@ -15,7 +15,7 @@ Info and Links:
 
 * npm info data2xml
 * https://npmjs.org/package/data2xml
-* https://gitlab.com/chilts/data2xml/
+* https://github.com/chilts/data2xml/
 
 Stable
 ------
